@@ -8,16 +8,16 @@ Here is how you might define some routes:
 
 ```javascript
 var app = restify.createServer();
-namespace(app, '/beep', function () {
+namespace(app, '/api', function () {
 	app.get('/thingys', thingysHandler);
 
-	namespace(app, '/boop', function () {
-		app.get('/plunk', plunkHandler);
+	namespace(app, '/beep', function () {
+		app.get('/boop', plunkHandler);
 	});
 });
 ```
 
 This would create the following routes:
 
-    GET /beep/thingys
-	GET /beep/boop/plunk
+    GET /api/thingys
+	GET /api/beep/boop

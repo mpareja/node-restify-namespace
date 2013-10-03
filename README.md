@@ -26,3 +26,7 @@ This would create the following routes:
 
     GET /api/thingys
 	GET /api/beep/boop
+
+## Not Implemented
+
+At the moment `restify-namespace` does not support regular expression subroutes. It will throw to warn you of this.

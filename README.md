@@ -2,11 +2,16 @@
 
 Defining sub-routes is something that happens often. Why keep repeating yourself? `restify-namespace` makes it easy to define nested route prefixes to DRY up your routes.
 
+## Installation
+
+    npm install --save namespace
+
 ## Example
 
 Here is how you might define some routes:
 
 ```javascript
+var namespace = require('restify-namespace');
 var app = restify.createServer();
 namespace(app, '/api', function () {
 	app.get('/thingys', thingysHandler);

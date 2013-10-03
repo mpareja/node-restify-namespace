@@ -7,11 +7,12 @@ module.exports = function (app, prefix, callback) {
   methods.forEach(function (method) {
     var orig = originals[method] = app[method];
     app[method] = function () {
-      if (typeof arguments[0] !== 'string') {
+      var args = Array.prototype.slice.call(arguments, 0);
+      if (typeof args[0] !== 'string') {
         throw new Error('Regular expression route support is not implemented');
       }
-      arguments[0] = prefix + arguments[0];
-      orig.apply(this, arguments);
+      args[0] = prefix + args[0];
+      orig.apply(this, args);
     };
   });
 

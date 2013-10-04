@@ -1,6 +1,6 @@
 {
   "name": "restify-namespace",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Namespace your restify routes",
   "main": "index.js",
   "directories": {

@@ -59,13 +59,38 @@ test('can continue adding to top-level after namespace', function (t) {
     .end(function (err) { t.error(err); });
 });
 
+test('can register name space using options object', function (t) {
+  var app = restify.createServer();
+  t.on('end', function () { app.close(); });
+  t.plan(1);
+
+  namespace(app, '/beep', function () {
+    app.get({ path: '/boop' }, function (req, res, next) {
+      res.json(200, {data: 'boop'});
+      next();
+    });
+  });
+
+  request(app)
+    .get('/beep/boop')
+    .expect(200, {data: 'boop'})
+    .end(function (err) { t.error(err); });
+});
+
 test('throws on regex routes', function (t) {
   var app = restify.createServer();
-  t.plan(1);
+  t.plan(2);
 
   namespace(app, '/beep', function () {
     t.throws(function () {
       app.get(/\/boop/, function (req, res, next) {
+        res.json(200, {data: 'boop'});
+        next();
+      });
+    }, /not implemented/);
+
+    t.throws(function () {
+      app.get({ path: /\/boop/ }, function (req, res, next) {
         res.json(200, {data: 'boop'});
         next();
       });

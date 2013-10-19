@@ -4,7 +4,7 @@ Defining sub-routes is something that happens often. Why keep repeating yourself
 
 ## Installation
 
-    npm install --save namespace
+    npm install --save restify-namespace
 
 ## Example
 

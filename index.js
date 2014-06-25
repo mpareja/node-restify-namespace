@@ -2,6 +2,20 @@ var methods = [
   'del',  'get', 'head', 'opts', 'post', 'put', 'patch'
 ];
 
+function enprefixRegExp(prefix, arg) {
+  var org = arg.toString();
+  org = org.substr(1,org.length-2);
+  var array = ["^",prefix.replace('/','\\/')];
+  if (org[0] == '^') {
+    array.push(org.substr(1));
+  } else {
+    array.push(".*");
+    array.push(org);
+  }
+  var pattern = array.join('');        
+  return new RegExp(pattern);
+}
+
 module.exports = function (app, prefix, callback) {
   var originals = {};
   methods.forEach(function (method) {
@@ -12,14 +26,14 @@ module.exports = function (app, prefix, callback) {
         regexMsg = 'Regular expression route support is not implemented';
 
       if (typeof arg === 'string') {
-        args[0] = prefix + arg;
+        args[0] = prefix + arg;        
       } else if (arg instanceof RegExp) {
-        throw new Error(regexMsg);
+        args[0] = enprefixRegExp(prefix,arg);
       } else if (typeof arg === 'object') {
         if (typeof arg.path === 'string') {
           arg.path = prefix + arg.path;
         } else if (arg.path instanceof RegExp) {
-          throw new Error(regexMsg);
+          arg.path = enprefixRegExp(prefix,arg.path);
         }
       }
       orig.apply(this, args);

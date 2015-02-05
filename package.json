@@ -27,8 +27,9 @@
     "url": "https://github.com/mpareja/node-restify-namespace/issues"
   },
   "devDependencies": {
-    "tape": "~1.1.1",
+    "jslint": "^0.7.3",
+    "restify": "~2.6.0",
     "supertest": "~0.8.0",
-    "restify": "~2.6.0"
+    "tape": "~1.1.1"
   }
 }

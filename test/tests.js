@@ -1,3 +1,4 @@
+/*jslint unparam: true */
 var test = require('tape');
 var restify = require('restify');
 var request = require('supertest');
@@ -46,7 +47,7 @@ test('can continue adding to top-level after namespace', function (t) {
   t.on('end', function () { app.close(); });
   t.plan(1);
 
-  namespace(app, '/beep', function () { });
+  namespace(app, '/beep', function () { return; });
 
   app.get('/crunch', function (req, res, next) {
     res.json(200, {data: 'crunch'});
